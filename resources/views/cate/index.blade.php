@@ -19,7 +19,7 @@
                     </form>
                     <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                         <thead>
-                            <tr role="row">
+                            <tr role="row" >
                                 <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 10px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                     ID
                                 </th>
@@ -37,22 +37,22 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                        <tbody role="alert" aria-live="polite" aria-relevant="all" >
                         	@foreach($a as $k=>$v)
                             <tr class="odd">
-                                <td class=" sorting_1">
+                                <td class=" sorting_1" >
                                     {{$v->id}}
                                 </td>
-                                <td class="">
+                                <td class="" >
                                     {{$v->name}}
                                 </td>
-                                <td class="">
+                                <td class="" align="center">
                                    {{$v->pid}}
                                 </td>
                                 <td class="">
                                     {{$v->path}}
                                 </td>
-                                <td class="">
+                                <td class="" align="center">
                                     <a href="/admin/cate/edit/{{$v->id}}" class='btn btn-success'><i class="icon-pencil"></i></a>
                                     &nbsp&nbsp&nbsp&nbsp
                                     <a href="/admin/cate/delete/{{$v->id}}" class='btn btn-info'><i class="icon-trash"></i></a>
@@ -61,8 +61,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                   <!-- 预留分页位<div class="dataTables_paginate paging_full_numbers" id="pages">
-                    </div> -->
+                   <!-- 预留分页位 -->
+                   <div class="dataTables_paginate paging_full_numbers" id="pages">
+                   
+                    </div>
                     
                 </div>
             </div>

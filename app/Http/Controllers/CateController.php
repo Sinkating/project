@@ -13,7 +13,11 @@ class CateController extends Controller
     //调整类别顺序方法
     public function getCates(){
         $res=DB::select('select *,concat(path,",",id) as paths from cates order by paths');
+        //dd($res);
         //遍历数据
+        //$res=$res->toArray();
+         // var_dump($res);
+         // die();
         foreach($res as $key=>$value){
             // dd($value);
             //拆分数组
@@ -63,7 +67,7 @@ class CateController extends Controller
     }
 
     //分页列表操作
-    public function getIndex(){
+    public function getIndex(Request $request){
         // $a= DB::table('cates')->get();
         $a=self::getCates();
         return view('cate.index',['a'=>$a]);

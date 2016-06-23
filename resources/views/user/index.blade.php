@@ -66,7 +66,7 @@
                                    {{$v->email}}
                                 </td>
                                 <td class="">
-                                    {{$v->status}}
+                                    {{Status($v->status)}}
                                 </td>
                                 <td class="">
                                     <a href="/admin/user/edit/{{$v->id}}" class='btn btn-success'><i class="icon-pencil"></i></a>
