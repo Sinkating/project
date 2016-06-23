@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/admin','AdminController@index');
 //用户操作
 Route::controller('/admin/user','UserController');
+Route::controller('/admin/cate','CateController');
 //Route::controller('/admin/type','TypeController');
 // Route::get('/admin', function () {
 //     return view('admin.index');

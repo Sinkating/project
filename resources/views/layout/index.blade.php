@@ -239,13 +239,13 @@
                     <li>
                         <a href="#"><i class="icon-th-list"></i> 分类管理</a>
                         <ul class="closed">
-                            <li><a href="">分类添加</a></li>
-                            <li><a href="">分类列表</a></li>
+                            <li><a href="{{url('/admin/cate/add')}}">分类添加</a></li>
+                            <li><a href="{{url('/admin/cate/index')}}">分类列表</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#"><i class="icon-file"></i> 文章管理</a>
+                        <a href=""><i class="icon-file"></i> 文章管理</a>
                         <ul class="closed">
                             <li><a href="">文章添加</a></li>
                             <li><a href="">文章列表</a></li>

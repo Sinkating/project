@@ -16,7 +16,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getAdd(){
-        return view('admin/user.add');
+        return view('user.add');
     }
     //执行添加
     public function postInsert(Request $request){
@@ -66,7 +66,7 @@ class UserController extends Controller
         //通过操作数据库去获取数据
         $admins=DB::table('admins')->where('username','like','%'.$request->input('keywords').'%')->paginate(4);
         // dd($users);
-        return view('admin/user.index',['admins'=>$admins,'request'=>$request->all()]);
+        return view('user.index',['admins'=>$admins,'request'=>$request->all()]);
     }
 
     //获取需要修改的信息
@@ -76,7 +76,7 @@ class UserController extends Controller
         //操作数据库
         $a=DB::table('admins')->where('id','=',$id)->first();
         // dd($u);
-        return view('admin/user.edit',['a'=>$a]);
+        return view('user.edit',['a'=>$a]);
     }
 
     //执行修改
