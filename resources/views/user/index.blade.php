@@ -29,7 +29,7 @@
                     </div>
                     <form action="/admin/user/index" method="get">
                     <div class="dataTables_filter" id="DataTables_Table_1_filter">
-                        <label><input type="text" name="keywords"></label><button class="btn btn-success">搜索</button>
+                        <label><input type="text" name="keywords" value="{{$request['keywords'] or ''}}"></label><button class="btn btn-success">搜索</button>
                     </div>
 
                     </form>

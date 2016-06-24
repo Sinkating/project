@@ -11,9 +11,9 @@
             </div>
             <div class="mws-panel-body no-padding">
                 <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
-                    <form action="/admin/user/index" method="get">
+                    <form action="/admin/cate/index" method="get">
                     <div class="dataTables_filter" id="DataTables_Table_1_filter">
-                        <label>搜索: <input type="text" name="keywords"></label><button class="btn btn-success">搜索</button>
+                        <label> <input type="text" name="keywords" value="{{$request['keywords'] or ''}}"></label><button class="btn btn-success">搜索</button>
                     </div>
 
                     </form>
@@ -63,7 +63,7 @@
                     </table>
                    <!-- 预留分页位 -->
                    <div class="dataTables_paginate paging_full_numbers" id="pages">
-                   
+                   {!!$a->appends($request)->render()!!}
                     </div>
                     
                 </div>

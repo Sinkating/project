@@ -9,10 +9,15 @@ use App\Http\Controllers\Controller;
 
 class CateController extends Controller
 {
-
+    public $request;
+    public function __construct(Request $request){
+        $this->request =$request;
+    }
     //调整类别顺序方法
     public function getCates(){
-        $res=DB::select('select *,concat(path,",",id) as paths from cates order by paths');
+        //原始数据查询 分页  使用 对比
+        // $res=DB::select('select *,concat(path,",",id) as paths from cates order by paths');
+        $res=DB::table('cates')->where("name","like","%".$this->request->input('keywords')."%")->select(DB::raw('*,concat(path,",",id) as paths '))->orderBy('paths')->paginate(5);
         //dd($res);
         //遍历数据
         //$res=$res->toArray();
@@ -70,6 +75,10 @@ class CateController extends Controller
     public function getIndex(Request $request){
         // $a= DB::table('cates')->get();
         $a=self::getCates();
-        return view('cate.index',['a'=>$a]);
+        return view('cate.index',['a'=>$a,'request'=>$request->all()]);
+    }
+    public function getEdit($id){
+        $info=DB::table('cates')->where('id','=',$id)->first();
+        return view('cate.edit',['cates'=>DB::table('cates')->get(),'info'=>$info]);
     }
 }
