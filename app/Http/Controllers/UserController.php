@@ -66,6 +66,8 @@ class UserController extends Controller
         //通过操作数据库去获取数据
         $admins=DB::table('admins')->where('username','like','%'.$request->input('keywords').'%')->paginate(4);
         // dd($users);
+        // var_dump($admins);
+        // die();
         return view('user.index',['admins'=>$admins,'request'=>$request->all()]);
     }
 

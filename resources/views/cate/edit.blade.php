@@ -20,7 +20,7 @@
                     					<select class="small" name="pid">
                     						<option value='0'>请选择</option>
                						    @foreach($cates as $k=>$v)
-                                                       <option value="{{$v->id}}" @if($v->id==$info->pid) selected  @endif>{{$v->name}}</option>
+                                                       <option value="{{$v->id}}" @if($v->id==$info->pid) selected   @endif>{{$v->name}}</option>
                						    @endforeach
                     					</select>
                     				</div>
