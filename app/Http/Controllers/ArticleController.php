@@ -62,10 +62,10 @@ class ArticleController extends Controller
         }        
     }
     //文章的列表
-    public  function getIndex(){
+    public  function getIndex(Request $request){
         //获取数据
-        $articles=DB::table('articles')->paginate(5);
-        return view('article.index',['articles'=>$articles]);
+        $articles=DB::table('articles')->where('title','like','%'.$request->input('keywords').'%')->paginate(5);
+        return view('article.index',['articles'=>$articles,'request'=>$request->all()]);
     }
 
     //修改页面
@@ -83,11 +83,26 @@ class ArticleController extends Controller
     //执行修改
     public function postUpdate(Request $request){
          // dd($request->all());
+        $request ->flash();
+        $this->validate($request, [
+            'pic'=>'image',
+            ],[
+            'pic.image'=>'文件类型不合法',//规则的描述
+            
+        ]);
         $data=$request->except('_token');
         //文件上传
+        $arc=DB::table('articles')->where('id','=',$request->id)->first();
+        // dd($arc);
+        $path='.'.$arc->pic;
+        //判断
+        if(file_exists($path)){
+            //删除文件夹里面的上传的图片
+             unlink($path);
+        }
         if($request->hasFile('pic')){
             //拼接文件名字
-            $pathname=time().mt_rand(10000,99999999).'.'.$request->file('pic')->getClientOriginalExtension();
+            $pathname=md5(time().uniqid().mt_rand(1,10000)).'.'.$request->file('pic')->getClientOriginalExtension();
             // dd($pathname);
             //上传文件
             $request->file('pic')->move(Config::get('app.upload_dir'),$pathname);
