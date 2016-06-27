@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -194,5 +194,5 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'upload_dir'=>'./upload/'.date('Ymd').'/'
 ];

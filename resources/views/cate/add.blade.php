@@ -19,9 +19,9 @@
                     				<div class="mws-form-item">
                     					<select class="small" name="pid">
                     						<option value='0'>请选择</option>
-               						@foreach($cates as $k=>$v)
-               						<option value='{{$v->id}}'>{{$v->name}}</option>
-               						@endforeach
+                    						@foreach($cates as $k=>$v)
+                    						<option value='{{$v->id}}'>{{$v->name}}</option>
+                    						@endforeach
                     					</select>
                     				</div>
                     			</div>                    			

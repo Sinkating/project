@@ -7,6 +7,8 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
+
 class CateController extends Controller
 {
     public $request;
@@ -34,7 +36,7 @@ class CateController extends Controller
         }
         return $res;
     }
-    public function getLaycates(){
+    public static function getLaycates(){
         //原始数据查询 分页  使用 对比
          $res=DB::select('select *,concat(path,",",id) as paths from cates order by paths');
         
@@ -109,66 +111,29 @@ class CateController extends Controller
         $data=$request->except('_token','id');
         $pid= $request->input('pid');//获取pid
         $inputid=$request->input('id');
-        // var_dump($inputid);
-        // die();
-        if($pid==0){
-            $data['path']=0;
-        }else{
+       
             //根据输入父ID查询得到父类
             $info=DB::table('cates')->where('id','=',$pid)->first();
             //拼接path路径 （新路径等于父类路径+父类ID）
-            $data['path']=$info->path.",".$info->id;
-            //根据输入ID查询得到输入路径
-            $inputpath=DB::table('cates')->where('id','=',$inputid)->first();
-           //  var_dump($inputid);
-           // die();
-            //根据路径和其ID拼接得到查询子类关键词
-           $inputkey=$inputpath->path;
-           if($inputkey==0){
-                $inputkey=$inputkey.','.$inputid;
-                var_dump($inputkey);
-                //$data['path']=$info->path;
-                $newpath=DB::select("select id,path from cates where path like '{$inputkey}%'");
-                $repath=array();
-               foreach($newpath as $key=>$v){
-                    $repath['path']=str_replace(0,$data['path'],$v->path);
-                    //var_dump($repath);
-                    //echo "<hr/>";
-                    $pathresult=DB::table('cates')->where('id','=',$v->id)->update($repath);
-                     //echo $v->id."</br>";
-
-               }
-             //v
-           }
-           //var_dump($inputkey);
-
-           //根据关键词替换子类新路径
-           //$newpath=array();res=DB::table('cates')->where("name","like","%".$this->request->input('keywords')."%")->select(DB::raw('*,concat(path,",",id) as paths '))->orderBy('paths')
-           // $newpath=DB::table('cates')->where("path","like",$inputkey."%");
-           // dd($newpath);
-           //$newpath=array();
-           $newpath=DB::select("select id,path from cates where path like '{$inputkey}%'");
-           // var_dump("select path from cates where path like '{$inputkey}%'");
-            //var_dump($newpath);
-            //var_dump($data);
-           $repath=array();
-           //die();
-           foreach($newpath as $key=>$v){
-                $repath['path']=str_replace($inputkey,$data['path'],$v->path);
-                //var_dump($repath);
-                //echo "<hr/>";
-                $pathresult=DB::table('cates')->where('id','=',$v->id)->update($repath);
-                 //echo $v->id."</br>";
-
-           }
-             //var_dump($data);
-            // var_dump($repath);
-            // die();
+            if($pid==0){
+                  $data['path']=0;
+            }else{
+                   $data['path']=$info->path.",".$info->id;
+            }
+            //根据输入ID查询path得到子类信息
+            $inputpath=DB::select("select * from cates where path like '%,{$inputid}%'");
            
-        }
-        $res=DB::table('cates')->where('id','=',$request->input('id'))->update($data);
-        //$res1=DB::table('cates')->where("path","like",'{$inputkey}%')->update($newpath);
+            $inpath=DB::table('cates')->where('id','=',$request->input('id'))->first();
+         
+           $repath=array();
+           foreach($inputpath as $k=>$v){
+                $repath['path']=str_replace($inpath->path,$data['path'],$v->path);
 
+                $pathresult=DB::table('cates')->where('id','=',$v->id)->update($repath);
+
+           }
+        
+        $res=DB::table('cates')->where('id','=',$request->input('id'))->update($data);
         if($res){
             return redirect('/admin/cate/index')->with('success','修改成功');
         }else{
@@ -176,7 +141,7 @@ class CateController extends Controller
         }
     }
         //执行删除
-        public function getDelete(){
+        public function getDelete($id){
             //检测当前分类下是否含有子类
             $data =DB::table('cates')->where('pid','=',$id)->count();
             if($data>0){
