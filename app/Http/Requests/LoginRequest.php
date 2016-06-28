@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class InsertArticleRequest extends Request
+class LoginRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +25,16 @@ class InsertArticleRequest extends Request
 
     return [
         //验证规则
-        'title' => 'required',
-        'content' => 'required',
-        'descr' => 'required',
-        'cate_id' => 'numeric',
-        'pic' =>'image',
+        'username' => 'required',
+        'password' => 'required',
+        
     ];
 }
     public function messages(){
     return [
-        'title.required' => '标题不能为空',
-        'content.required' => '内容不能为空',
-        'descr.required' => '描述不能为空',
-        'cate_id.numeric' =>'文章分类参数有误',
-        'pic.image'=>'文件类型不合法',
+        'username.required' => '用户名不能为空',
+        'password.required' => '密码不能为空',
+       
     ];
 }
 }

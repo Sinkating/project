@@ -38,12 +38,7 @@ class ArticleController extends Controller
         //dd($request);
         //laravel 强大之处  表单验证规则十分方便
         $request ->flash();
-        $this->validate($request, [
-            'pic'=>'image',
-            ],[
-            'pic.image'=>'文件类型不合法',//规则的描述
-            
-        ]);
+        
         if($request->hasFile('pic')){
             //拼接文件名字
             $pathname=md5(time().mt_rand(1,10000)).'.'.$request->file('pic')->getClientOriginalExtension();
@@ -81,17 +76,14 @@ class ArticleController extends Controller
     }
 
     //执行修改
-    public function postUpdate(Request $request){
+    public function postUpdate(InsertArticleRequest $request){
          // dd($request->all());
         $request ->flash();
-        $this->validate($request, [
-            'pic'=>'image',
-            ],[
-            'pic.image'=>'文件类型不合法',//规则的描述
-            
-        ]);
+
         $data=$request->except('_token');
-        //文件上传
+        
+        if($request->hasFile('pic')){
+            //文件上传
         $arc=DB::table('articles')->where('id','=',$request->id)->first();
         // dd($arc);
         $path='.'.$arc->pic;
@@ -100,13 +92,14 @@ class ArticleController extends Controller
             //删除文件夹里面的上传的图片
              unlink($path);
         }
-        if($request->hasFile('pic')){
             //拼接文件名字
             $pathname=md5(time().uniqid().mt_rand(1,10000)).'.'.$request->file('pic')->getClientOriginalExtension();
             // dd($pathname);
             //上传文件
             $request->file('pic')->move(Config::get('app.upload_dir'),$pathname);
             $data['pic']=trim(Config::get('app.upload_dir').$pathname,'.');
+        }
+            
             $data['user_id']=1;
             $data['created_at']=date('Y-m-d H:i:s');
 
@@ -117,7 +110,7 @@ class ArticleController extends Controller
                 return back()->with('error','修改失败');
             }
        }
-    }
+    
 
 
  //执行删除

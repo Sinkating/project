@@ -181,12 +181,12 @@
             <div id="mws-user-info" class="mws-inset">
             
             	<!-- User Photo -->
-            	<div id="mws-user-photo">
+            	<!-- <div id="mws-user-photo">
                 	<img src="/b/example/profile.jpg" alt="User Photo">
-                </div>
+                </div> -->
                 
                 <!-- Username and Functions -->
-                <div id="mws-user-functions">
+                <!-- <div id="mws-user-functions">
                     <div id="mws-username">
                         Hello, John Doe
                     </div>
@@ -195,7 +195,8 @@
                         <li><a href="#">Change Password</a></li>
                         <li><a href="index.html">Logout</a></li>
                     </ul>
-                </div>
+                </div> -->
+                <a href="{{url('/admin/logout')}}">退出</a>
             </div>
         </div>
     </div>
@@ -255,8 +256,16 @@
                     <li>
                         <a href="#"><i class="icon-file"></i> 商品管理</a>
                         <ul class="closed">
-                            <li><a href="">商品添加</a></li>
-                            <li><a href="">商品列表</a></li>
+                            <li><a href="{{url('/admin/goods/add')}}">商品添加</a></li>
+                            <li><a href="{{url('/admin/goods/index')}}">商品列表</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="icon-file"></i> 友情链接管理</a>
+                        <ul class="closed">
+                            <li><a href="{{url('/admin/friendlink/add')}}">友情链接添加</a></li>
+                            <li><a href="{{url('/admin/friendlink/index')}}">友情链接列表</a></li>
                         </ul>
                     </li>
                 </ul>

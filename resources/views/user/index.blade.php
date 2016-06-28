@@ -80,7 +80,7 @@
                     <div class="dataTables_info" id="DataTables_Table_1_info">
                         Showing 1 to 10 of 57 entries
                     </div>
-                    <!-- 分页借口 -->
+                    <!-- 分页接口 -->
                     <div class="dataTables_paginate paging_full_numbers" id="pages">
                          {!!$admins->appends($request)->render()!!}
                     </div>
