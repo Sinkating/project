@@ -17,6 +17,10 @@ class LoginController extends Controller
      //dd($request->all());
     //检测用户
     $admin=DB::table('admins')->where('username','=',$request->input('username'))->first();
+   // dd($admin);
+    if(empty($admin)){
+        return back()->with('error','登陆失败');
+    }
     //dd($admin);
     // $a=Hash::make($request->input('password'));
     // //$b=str_random(50);

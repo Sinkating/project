@@ -15,19 +15,20 @@
 <div class="login_boder">
 
 <div class="login_padding" id="login_model">
-  <form action="/admin/login"  method="post" >
-                 @if (count($errors) > 0)
-                  @foreach ($errors->all() as $error)
-                    <div class="mws-form-message error">
-                        <div class="alert alert-danger">
-                            <ul>
-                                    <li>{{ $error }}</li>
-                            </ul>
+                      @if (count($errors) > 0)
+                      @foreach ($errors->all() as $error)
+                        <div class="mws-form-message error">
+                            <div class="alert alert-danger">
+                                <ul>
+                                        <li>{{ $error }}</li>
+                                </ul>
+                            </div>
+                            
                         </div>
-                        
-                    </div>
-                    @endforeach
-                    @endif
+                        @endforeach
+                        @endif
+  <form action="/admin/login"  method="post" >
+                
   <h2>用户名：</h2>
   <label>
     <input type="text" id="username"  name="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="Your name">
@@ -37,10 +38,6 @@
     <input type="password" name="password" id="userpwd" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="******">
   </label>
   
- 
- 
-
- 
  
   <div class="rem_sub">
       {{csrf_field()}}

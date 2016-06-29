@@ -17,7 +17,7 @@
 		                    </div>
 		                    @endforeach
 		                    @endif
-                    	<form action="/admin/article/insert" class="mws-form" method="post" enctype="multipart/form-data">
+                    	<form action="/admin/friendlink/insert" class="mws-form" method="post" enctype="multipart/form-data">
                     		<div class="mws-form-inline">
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">网站名称</label>
@@ -52,7 +52,7 @@
                     		</div>
                     		<div class="mws-button-row">
                     			{{csrf_field()}}
-                                <input type="hidden" name="id" value=""></input>
+                                <!-- <input type="hidden" name="id" value=""></input> -->
                     			<input type="submit" class="btn btn-danger" value="提交">
                     			<input type="reset" class="btn " value="重置">
                     		</div>
